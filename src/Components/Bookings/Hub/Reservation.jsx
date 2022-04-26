@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Detail from './Detail';
 import flecha from '../../../icons/flecha-indiv.png'
+import flecha2 from '../../../icons/flecha-hacia-arriba.png'
 
 const Reservation = ({locator,name,service, services,bg,details,setDetails}) => {
     const [open, setOpen] = useState(false);
@@ -63,7 +64,7 @@ const Reservation = ({locator,name,service, services,bg,details,setDetails}) => 
                 sendAll={sendAll}
                 />
               )}
-                <div className='bg-color2 w-full h-6 mt-12 cursor-pointer' onClick={handleOpen}></div>
+                <div className='bg-color2 w-full h-6 mt-12 cursor-pointer flex' onClick={handleOpen}><img src={flecha2} alt="" className='w-5 h-5 m-auto'/></div>
             </div>
         }
     </div>
