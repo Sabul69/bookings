@@ -28,8 +28,8 @@ const Filter = () => {
     }
   return (
     <div className='overflow-hidden'>
-      <h3 className='text-2xl text-color3 font m-5 relative left-1/4'>Filtrado de reservas</h3>
-      <div className='bg-color1 flex flex-wrap justify-between text-color3 p-1'>
+      <h3 className='txt-25 text-color3 m-5 relative left-1/4'>Filtrado de reservas</h3>
+      <div className='bg-color1 flex flex-wrap justify-between text-color3 p-1 txt-14'>
         <div className='p-3 w-3/12' >
           <p className='font-semibold'>Nombre del titular</p>
           <input type="text" name="name" id="name" placeholder='Nombre' value={filter.nombre} className='ipt-filter' onChange={(e)=>handleFilter(e,'nombre')}/>

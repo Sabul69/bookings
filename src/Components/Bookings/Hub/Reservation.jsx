@@ -33,7 +33,7 @@ const Reservation = ({locator,name,service, services,bg,details,setDetails}) => 
     
   return (
     <div>
-        <div className={`flex justify-between p-2 ${bg%2===0 && 'bg-color'}`}>
+        <div className={`txt-14 flex justify-between p-2 ${bg%2===0 && 'bg-color'}`}>
             <p className='w-3/12 pl-14'>{locator}</p>
             <p className='w-3/12'>{name}</p>
             <p className='w-3/12'>{service}</p>
@@ -46,10 +46,10 @@ const Reservation = ({locator,name,service, services,bg,details,setDetails}) => 
         {open &&
                 <div className='m-auto bg-colordet pb-2'>
                 <div className='flex justify-between'>
-                    <h4 className='text-xl text-color3 p-5'>Detalles de la reserva</h4>
+                    <h4 className='txt-20 text-color3 p-6'>Detalles de la reserva</h4>
                     <div>
-                    <button className='text-color2 p-2 bg-white border-2 border-color2 rounded-md my-3' onClick={handleFill}>Aplicar a todos</button>
-                    <button className='text-color2 p-2 bg-white border-2 border-color2 rounded-md my-3 mx-7' onClick={handleSendAll}>Enviar ATP a todos</button>
+                    <button className='text-color2 p-2 bg-white border-2 border-color2 rounded-md my-3 txt-14' onClick={handleFill}>Aplicar a todos</button>
+                    <button className='text-color2 p-2 bg-white border-2 border-color2 rounded-md my-3 mx-7 txt-14' onClick={handleSendAll}>Enviar ATP a todos</button>
                     </div>
                 </div>
               {services.map((service,index)=>

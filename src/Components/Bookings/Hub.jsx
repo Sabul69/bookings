@@ -16,7 +16,7 @@ const Hub = () => {
   return (
     <>
       <div className='flex justify-between'>
-          <h3 className='text-2xl text-color3 font m-5'>Hub for Travel Partner</h3>
+          <h3 className='txt-25 text-color3 font m-5'>Hub for Travel Partner</h3>
         <div className='flex justify-between w-1/3'>
           <div className='flex w-1/3 mt-5 cursor-pointer' onClick={handleClose}>
           <p className='text-color4 mr-3' >Cerrar todos</p> <img className='w-4 h-4 m-1' src={flecha} alt="." />
