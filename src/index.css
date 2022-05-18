@@ -2,36 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200&display=swap");
 
 @layer components {
   .btn-primary {
     @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75;
   }
-  .btn-filter{
-    @apply bg-color2 text-white px-12 py-2 rounded-md m-3 mt-6
+  .btn-filter {
+    @apply bg-color2 text-white px-10 md:px-12 py-2 rounded-md m-3 mt-6;
   }
-  .ipt-filter{
-    @apply p-2 rounded-md border text-color5 w-full
+  .ipt-filter {
+    @apply p-2 rounded-md border text-color5 w-full;
   }
-  .border-resv{
-    @apply border-color2 border-opacity-60 border-2
+  .border-resv {
+    @apply border-color2 border-opacity-60 border-2;
   }
 }
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'Mulish';
+  font-family: "Mulish";
 }
-.transition{
-  transition: all .4s ease;
+.transition {
+  transition: all 0.4s ease;
 }
 
 body {
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
 }
-

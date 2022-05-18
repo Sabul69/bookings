@@ -7,7 +7,7 @@ import '../Styles/Booking/Booking.styles.css'
 
 const Bookings = () => {
   return (
-    <div className='contain m-auto mb-4'>
+    <div className='contain m-auto'>
         <Filter/>
         <Hub/>
     </div>
