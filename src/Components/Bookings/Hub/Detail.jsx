@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+//Icons
 import success from "../../../icons/success.png";
 import error from "../../../icons/error.png";
 import arrival from "../../../icons/arrival.png";
@@ -7,6 +8,9 @@ import emailIcon from "../../../icons/email.png";
 import phoneIcon from "../../../icons/sms.png";
 import waIcon from "../../../icons/whatsapp.png";
 import langIcon from "../../../icons/language.png";
+//Phone input
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 
 const Detail = ({
   index,
@@ -80,39 +84,15 @@ const Detail = ({
           onChange={(e) => handleAtpInfo(e, "email")}
         />
       </div>
-      <div className="wper15 my-1 relative">
-        <div className="absolute inset-y-0 left-2 flex items-center">
-          <img src={phoneIcon} alt="" className="" />
-        </div>
-        <input
-          type="tel"
-          name=""
-          id=""
-          placeholder="Telefono"
-          className="ipt-filter pl-10"
-          value={atpInfo.phone}
-          onChange={(e) => handleAtpInfo(e, "phone")}
-        />
-      </div>
-      <div className="wper15 xl:mx-1 relative  my-1 xl:mr-4">
-        <div className="absolute inset-y-0 left-2 flex items-center">
-          <img src={waIcon} alt="" className="" />
-        </div>
-        <input
-          type="tel"
-          name=""
-          id=""
-          placeholder="Whats App"
-          className="ipt-filter pl-10"
-          value={atpInfo.whatsapp}
-          onChange={(e) => handleAtpInfo(e, "whatsapp")}
-        />
-      </div>
+
+      <PhoneInput onlyCountries={["us"]} placeholder="Telefono" />
+      <PhoneInput placeholder="WhatsApp" preferredCountries={["us", "mx"]} />
+
       <div className="wper13 my-1 xl:ml-5 relative">
         <div className="absolute inset-y-0 left-2 flex items-center">
           <img src={langIcon} alt="" className="" />
         </div>
-        <select name="" id="" className="ipt-filter pl-10">
+        <select name="" id="" className="ipt-filter pl-10 h-full">
           <option value="">Español</option>
           <option value="">Ingles</option>
         </select>
