@@ -29,7 +29,11 @@ const Detail = ({
   const [icon, setIcon] = useState("stop");
 
   const handleAtpInfo = (e, name) => {
-    setAtpInfo({ ...atpInfo, [name]: e.target.value });
+    if (name === "phone" || name === "whatsapp") {
+      setAtpInfo({ ...atpInfo, [name]: e });
+    } else {
+      setAtpInfo({ ...atpInfo, [name]: e.target.value });
+    }
   };
   const handleSend = () => {
     setIcon("loading");
@@ -85,8 +89,18 @@ const Detail = ({
         />
       </div>
 
-      <PhoneInput onlyCountries={["us"]} placeholder="Telefono" />
-      <PhoneInput placeholder="WhatsApp" preferredCountries={["us", "mx"]} />
+      <PhoneInput
+        onlyCountries={["us"]}
+        placeholder="Telefono"
+        value={atpInfo.phone}
+        onChange={(e) => handleAtpInfo(e, "phone")}
+      />
+      <PhoneInput
+        placeholder="WhatsApp"
+        preferredCountries={["us", "mx"]}
+        value={atpInfo.whatsapp}
+        onChange={(e) => handleAtpInfo(e, "whatsapp")}
+      />
 
       <div className="wper13 my-1 xl:ml-5 relative">
         <div className="absolute inset-y-0 left-2 flex items-center">
