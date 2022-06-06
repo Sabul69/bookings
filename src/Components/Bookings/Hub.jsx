@@ -22,14 +22,14 @@ const Hub = () => {
             onClick={handleClose}
           >
             <p className="text-color4 mr-0 sm:mr-3">Cerrar todos</p>{" "}
-            <img className="w-4 h-4 m-1" src={flecha} alt="." />
+            <img className="w-4 h-4 m-1 rotate-180" src={flecha} alt="." />
           </div>
           <div
             className="flex w-5/12 sm:w-1/3 mt-5 cursor-pointer"
             onClick={handleOpen}
           >
             <p className="text-color4 mr-0 sm:mr-3 ">Abrir todos</p>{" "}
-            <img className="w-4 h-4 m-1 rotate-180" src={flecha} alt="." />
+            <img className="w-4 h-4 m-1 " src={flecha} alt="." />
           </div>
           <div className="flex flex-col sm:flex-row w-2/12 sm:w-1/3 my-5 justify-center">
             <p className="font-semibold text-color3 mt-1 mr-3">Results:</p>

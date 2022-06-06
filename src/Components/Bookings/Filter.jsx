@@ -91,13 +91,11 @@ const Filter = () => {
         </div>
         <div className="p-3 w-full sm:w-6/12 md:w-3/12">
           <p className="font-semibold">Con fecha de:</p>
-          <input
-            type="date"
-            name="confirmacion"
-            id="confirmacion"
-            placeholder="Confirmación"
-            className="ipt-filter"
-          />
+          <select name="" id="" className="ipt-filter">
+            <option value="Confirmación" selected>
+              Confirmación
+            </option>
+          </select>
         </div>
         <div className="w-full md:w-5/12 lg:w-3/12 flex justify-between">
           <div className="p-3 w-3/6">

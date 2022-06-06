@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Detail from "./Detail";
 import flecha from "../../../icons/flecha-indiv.png";
-import flecha2 from "../../../icons/flecha-hacia-arriba.png";
+import flecha2 from "../../../icons/flecha-hacia-arriba.svg";
 
 const Reservation = ({
   locator,
