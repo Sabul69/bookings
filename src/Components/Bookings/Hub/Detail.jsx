@@ -21,6 +21,8 @@ const Detail = ({
   setSendAll,
   sendAll,
 }) => {
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [isEmptyWa, setIsEmptyWa] = useState(true);
   const [atpInfo, setAtpInfo] = useState({
     email: "",
     phone: "",
@@ -35,6 +37,7 @@ const Detail = ({
       setAtpInfo({ ...atpInfo, [name]: e.target.value });
     }
   };
+
   const handleSend = () => {
     setIcon("loading");
     try {
@@ -45,6 +48,8 @@ const Detail = ({
     setIcon("stop");
   };
   useEffect(() => {
+    atpInfo.phone !== "" ? setIsEmpty(false) : setIsEmpty(true);
+    atpInfo.whatsapp !== "" ? setIsEmptyWa(false) : setIsEmptyWa(true);
     if (index === 0) {
       setFill(atpInfo);
     }
@@ -88,19 +93,38 @@ const Detail = ({
           onChange={(e) => handleAtpInfo(e, "email")}
         />
       </div>
-
-      <PhoneInput
-        onlyCountries={["us"]}
-        placeholder="Telefono"
-        value={atpInfo.phone}
-        onChange={(e) => handleAtpInfo(e, "phone")}
-      />
-      <PhoneInput
-        placeholder="WhatsApp"
-        preferredCountries={["us", "mx"]}
-        value={atpInfo.whatsapp}
-        onChange={(e) => handleAtpInfo(e, "whatsapp")}
-      />
+      <div className="wper15 my-1 relative">
+        <div
+          className={`absolute inset-y-0 left-3 flex items-center ${
+            isEmpty && "z-10"
+          }`}
+        >
+          <img src={phoneIcon} alt="" className="" />
+        </div>
+        <PhoneInput
+          onlyCountries={["us"]}
+          placeholder="Telefono"
+          value={atpInfo.phone}
+          buttonClass={isEmpty && "!hidden"}
+          onChange={(e) => handleAtpInfo(e, "phone")}
+        />
+      </div>
+      <div className="wper15 my-1 relative">
+        <div
+          className={`absolute inset-y-0 left-3 flex items-center ${
+            isEmptyWa && "z-10"
+          }`}
+        >
+          <img src={waIcon} alt="" className="" />
+        </div>
+        <PhoneInput
+          placeholder="WhatsApp"
+          preferredCountries={["us", "mx"]}
+          value={atpInfo.whatsapp}
+          buttonClass={isEmptyWa && "!hidden"}
+          onChange={(e) => handleAtpInfo(e, "whatsapp")}
+        />
+      </div>
 
       <div className="wper13 my-1 xl:ml-5 relative">
         <div className="absolute inset-y-0 left-2 flex items-center">
