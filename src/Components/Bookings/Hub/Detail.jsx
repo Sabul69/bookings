@@ -105,7 +105,7 @@ const Detail = ({
           onlyCountries={["us"]}
           placeholder="Telefono"
           value={atpInfo.phone}
-          buttonClass={isEmpty && "!hidden"}
+          buttonClass={isEmpty && "!hidden z-20"}
           onChange={(e) => handleAtpInfo(e, "phone")}
         />
       </div>
@@ -122,6 +122,7 @@ const Detail = ({
           preferredCountries={["us", "mx"]}
           value={atpInfo.whatsapp}
           buttonClass={isEmptyWa && "!hidden"}
+          dropdownClass="!h-20"
           onChange={(e) => handleAtpInfo(e, "whatsapp")}
         />
       </div>
