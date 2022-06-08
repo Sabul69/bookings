@@ -47,9 +47,10 @@ const Detail = ({
     }
     setIcon("stop");
   };
+  const handleFocusPhone = (n) => {
+    n === 1 ? setIsEmpty(false) : setIsEmptyWa(false);
+  };
   useEffect(() => {
-    atpInfo.phone !== "" ? setIsEmpty(false) : setIsEmpty(true);
-    atpInfo.whatsapp !== "" ? setIsEmptyWa(false) : setIsEmptyWa(true);
     if (index === 0) {
       setFill(atpInfo);
     }
@@ -106,6 +107,7 @@ const Detail = ({
           placeholder="Telefono"
           value={atpInfo.phone}
           buttonClass={isEmpty && "!hidden z-20"}
+          onFocus={(e) => handleFocusPhone(1)}
           onChange={(e) => handleAtpInfo(e, "phone")}
         />
       </div>
@@ -123,6 +125,7 @@ const Detail = ({
           value={atpInfo.whatsapp}
           buttonClass={isEmptyWa && "!hidden"}
           dropdownClass="!h-20"
+          onFocus={(e) => handleFocusPhone(2)}
           onChange={(e) => handleAtpInfo(e, "whatsapp")}
         />
       </div>
