@@ -20,6 +20,11 @@ const Detail = ({
   endFill,
   setSendAll,
   sendAll,
+  service,
+  flight,
+  date,
+  hotel,
+  name,
 }) => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [isEmptyWa, setIsEmptyWa] = useState(true);
@@ -68,17 +73,24 @@ const Detail = ({
     <div className="bg-white w-96 m-auto p-3 rounded-md border-2 border-color5 border-opacity-40 flex justify-between flex-wrap text-color3 mb-4 txt-14">
       <p className="w-full sm:w-3/12 my-1">
         <span className="font-semibold">Nombre del pasajero </span>
+        {name}
       </p>
-      <p className="w-full sm:w-2/12 my-1">
-        <span className="font-semibold">Servicio | </span>
+      <p className="w-full sm:w-2/12 my-1 font-bold">
+        Servicio | <span className="text-color2">{service}</span> {" | "} {date}
       </p>
       <div className="w-full sm:w-2/12 my-1 flex">
-        <img src={arrival} className="mr-4 h-5" alt="" />
-        <p className="">F74JUA</p>
+        <img
+          src={service === "IN" ? arrival : departure}
+          className="mr-4 h-5"
+          alt=""
+        />
+        <p className="">{flight}</p>
       </div>
       <p className="w-full sm:w-4/12 my-1">
-        <span className="font-semibold">Arrival Hotel </span> Golden Parnassus
-        All Inclusive Resort & Spa
+        <span className="font-semibold">
+          {service === "IN" ? "Arrival Hotel " : "Departure Hotel "}
+        </span>
+        {hotel}
       </p>
       <div className="wper23 my-1 xl:mx-1 relative">
         <div className="absolute inset-y-0 left-2 flex items-center">

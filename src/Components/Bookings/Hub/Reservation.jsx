@@ -12,14 +12,16 @@ const Reservation = ({
   details,
   setDetails,
 }) => {
+  //Use State
   const [open, setOpen] = useState(false);
   const [fill, setFill] = useState({});
   const [endFill, setEndFill] = useState(false);
   const [sendAll, setSendAll] = useState(false);
+  const [amount, setAmount] = useState();
+  //handlers
   const handleOpen = () => {
     setOpen(!open);
   };
-
   const handleFill = () => {
     setEndFill(true);
   };
@@ -36,7 +38,12 @@ const Reservation = ({
       setOpen(false);
       setDetails("stop");
     }
-  }, [details, setDetails, open]);
+    const handleAmountServices = () => {
+      const a = [...service];
+      setAmount(a.length);
+    };
+    handleAmountServices();
+  }, [details, setDetails, open, service]);
 
   return (
     <div>
@@ -47,7 +54,13 @@ const Reservation = ({
       >
         <p className="w-3/12 pl-2 sm:pl-14">{locator}</p>
         <p className="w-3/12">{name}</p>
-        <p className="w-3/12">{service}</p>
+        <p className="w-3/12">
+          {amount === 1
+            ? `Transfer ${service}`
+            : amount === 2
+            ? "Round Trip"
+            : "Multi Service"}
+        </p>
         <div className="w-2/12 cursor-pointer flex" onClick={handleOpen}>
           <p className="text-color4 hidden sm:contents">
             {!open ? "VER DETALLE" : "CERRAR DETALLE"}
@@ -95,6 +108,11 @@ const Reservation = ({
               endFill={endFill}
               setSendAll={setSendAll}
               sendAll={sendAll}
+              service={service.service}
+              flight={service.flight}
+              date={service.date}
+              hotel={service.hotel}
+              name={name}
             />
           ))}
           <div

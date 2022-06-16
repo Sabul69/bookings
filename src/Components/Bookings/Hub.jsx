@@ -2,7 +2,7 @@ import { useState } from "react";
 import flecha from "../../icons/flecha.png";
 import Reservations from "./Hub/Reservations";
 
-const Hub = () => {
+const Hub = ({ info }) => {
   const [details, setDetails] = useState();
 
   const handleClose = () => {
@@ -40,7 +40,7 @@ const Hub = () => {
           </div>
         </div>
       </div>
-      <Reservations details={details} setDetails={setDetails} />
+      <Reservations info={info} details={details} setDetails={setDetails} />
     </>
   );
 };

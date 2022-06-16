@@ -92,7 +92,7 @@ const Filter = () => {
         <div className="p-3 w-full sm:w-6/12 md:w-3/12">
           <p className="font-semibold">Con fecha de:</p>
           <select name="" id="" className="ipt-filter">
-            <option value="Confirmación" selected>
+            <option value="Confirmación" defaultValue={true}>
               Confirmación
             </option>
           </select>

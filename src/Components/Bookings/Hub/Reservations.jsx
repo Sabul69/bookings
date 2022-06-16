@@ -1,27 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Reservation from "./Reservation";
+import { handleFormatInfo } from "../../../handlers/Bookings/handlers";
 
-const Reservations = ({ details, setDetails }) => {
-  const data = [
-    {
-      locator: "5A26J9",
-      name: "Omar Mejenes",
-      service: "Transfer In",
-      services: ["servicio1", "servicio2", "servicio3"],
-    },
-    {
-      locator: "8A26J9",
-      name: "Pedro Perez",
-      service: "Transfer Out",
-      services: ["servicio1"],
-    },
-    {
-      locator: "7A26J9",
-      name: "Jose Garcia",
-      service: "Transfer In",
-      services: ["servicio1", "servicio2"],
-    },
-  ];
+const Reservations = ({ info, details, setDetails }) => {
+  const [data, setData] = useState([]);
+  console.log(data);
+
+  useEffect(() => {
+    handleFormatInfo(info, setData);
+  }, [info]);
+
   return (
     <div className="border-resv rounded-md pb-14">
       <div className="flex justify-between border-b-2 border-b-color2 border-opacity-60 py-4 txt-16">
