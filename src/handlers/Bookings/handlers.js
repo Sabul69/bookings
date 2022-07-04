@@ -1,8 +1,6 @@
-const handleFormatInfo = (info, setData) => {
-  //Slice array to 200 results
-  const piece = info.slice(0, 200);
+const handleFormatInfo = (info, setData, slice) => {
   //format data
-  const formatedData = piece.reduce((acc, cur, idx) => {
+  const formatedData = info.reduce((acc, cur, idx) => {
     let service;
     if (cur.ServiceType === "OUT") {
       service = {
@@ -46,6 +44,7 @@ const handleFormatInfo = (info, setData) => {
     };
     accumulator += 1;
   }
-  setData(formatedArray);
+  const fragment = formatedArray.slice(0, slice);
+  setData(fragment);
 };
 export { handleFormatInfo };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import flecha from "../../icons/flecha.png";
 import Reservations from "./Hub/Reservations";
 
-const Hub = ({ info }) => {
+const Hub = ({ data, setSlice }) => {
   const [details, setDetails] = useState();
 
   const handleClose = () => {
@@ -10,6 +10,10 @@ const Hub = ({ info }) => {
   };
   const handleOpen = () => {
     setDetails(true);
+  };
+
+  const handleSlice = (value) => {
+    setSlice(value);
   };
 
   return (
@@ -33,14 +37,20 @@ const Hub = ({ info }) => {
           </div>
           <div className="flex flex-col sm:flex-row w-2/12 sm:w-1/3 my-5 justify-center">
             <p className="font-semibold text-color3 mt-1 mr-3">Results:</p>
-            <select name="results" className="ipt-filter sm:w-1/3 lg:w-full">
+            <select
+              name="results"
+              className="ipt-filter sm:w-1/3 lg:w-full"
+              onChange={(e) => handleSlice(e.target.value)}
+              defaultValue={"30"}
+            >
               <option value="10">10</option>
               <option value="20">20</option>
+              <option value="30">30</option>
             </select>
           </div>
         </div>
       </div>
-      <Reservations info={info} details={details} setDetails={setDetails} />
+      <Reservations data={data} details={details} setDetails={setDetails} />
     </>
   );
 };

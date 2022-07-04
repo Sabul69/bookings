@@ -1,19 +1,8 @@
 import React, { useState } from "react";
 
-const Filter = () => {
-  const [filter, setFilter] = useState({
-    nombre: "",
-    agencia: "",
-    localizador: "",
-    registrada: "si",
-    destino: "Cancun",
-  });
-
+const Filter = ({ filter, setFilter, handleUrl }) => {
   const handleFilter = (e, n) => {
     setFilter({ ...filter, [n]: e.target.value });
-  };
-
-  const fetchFilter = () => {
     console.log(filter);
   };
 
@@ -86,7 +75,7 @@ const Filter = () => {
             className="ipt-filter"
             onChange={(e) => handleFilter(e, "destino")}
           >
-            <option value="cancun">Cancun</option>
+            <option value="15">Cancun</option>
           </select>
         </div>
         <div className="p-3 w-full sm:w-6/12 md:w-3/12">
@@ -100,11 +89,23 @@ const Filter = () => {
         <div className="w-full md:w-5/12 lg:w-3/12 flex justify-between">
           <div className="p-3 w-3/6">
             <p className="font-semibold">Desde</p>
-            <input type="date" name="desde" id="desde" className="ipt-filter" />
+            <input
+              type="date"
+              name="desde"
+              id="desde"
+              className="ipt-filter"
+              onChange={(e) => handleFilter(e, "inicio")}
+            />
           </div>
           <div className="p-3 w-3/6">
             <p className="font-semibold">Hasta</p>
-            <input type="date" name="hasta" id="hasta" className="ipt-filter" />
+            <input
+              type="date"
+              name="hasta"
+              id="hasta"
+              className="ipt-filter"
+              onChange={(e) => handleFilter(e, "final")}
+            />
           </div>
         </div>
         <div className="w-full lg:w-6/12 p-3 flex justify-end">
@@ -112,7 +113,7 @@ const Filter = () => {
             <button className="btn-filter" onClick={handleClean}>
               Limpiar
             </button>
-            <button className="btn-filter mr-0" onClick={fetchFilter}>
+            <button className="btn-filter mr-0" onClick={handleUrl}>
               Filtrar
             </button>
           </div>
