@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Filter = ({ filter, setFilter, handleUrl }) => {
   const handleFilter = (e, n) => {
@@ -80,10 +80,16 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
         </div>
         <div className="p-3 w-full sm:w-6/12 md:w-3/12">
           <p className="font-semibold">Con fecha de:</p>
-          <select name="" id="" className="ipt-filter">
-            <option value="Confirmación" defaultValue={true}>
-              Confirmación
+          <select
+            name=""
+            id=""
+            className="ipt-filter"
+            onChange={(e) => handleFilter(e, "fecha")}
+          >
+            <option value="Reservacion" defaultValue={true}>
+              Reservacion
             </option>
+            <option value="Viaje">Viaje</option>
           </select>
         </div>
         <div className="w-full md:w-5/12 lg:w-3/12 flex justify-between">

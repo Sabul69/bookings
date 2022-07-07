@@ -15,6 +15,7 @@ const Bookings = () => {
     localizador: "",
     registrada: "si",
     destino: "15",
+    fecha: "Reservacion",
   });
   const [data, setData] = useState([]);
   const [slice, setSlice] = useState(30);
@@ -31,8 +32,23 @@ const Bookings = () => {
         filter.destino && `&intIdDel=${filter.destino}`
       }${nombre && `&strName=${nombre}`}${
         apellido ? `&strLastName=${apellido}` : ""
-      }${filter.inicio ? `&dteTravelIni=${filter.inicio}T00:00:00` : ""}${
-        filter.final ? `&dteTravelFin=${filter.final}T00:00:00` : ""
+      }${
+        filter.inicio && filter.fecha === "Reservacion"
+          ? `&dteDateIni=${filter.inicio}T00:00:00`
+          : ""
+      }${
+        filter.final && filter.fecha === "Reservacion"
+          ? `&dteDteFin=${filter.final}T00:00:00`
+          : ""
+      }
+      ${
+        filter.inicio && filter.fecha === "Viaje"
+          ? `&dteTravelIni=${filter.inicio}T00:00:00`
+          : ""
+      }${
+        filter.final && filter.fecha === "Viaje"
+          ? `&dteTravelFin=${filter.final}T00:00:00`
+          : ""
       }`
     );
     console.log(url);
@@ -45,8 +61,6 @@ const Bookings = () => {
 
   useEffect(() => {
     handleFetchData();
-    console.log(data);
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, slice]);
 
