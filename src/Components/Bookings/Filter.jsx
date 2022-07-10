@@ -13,6 +13,8 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
       localizador: "",
       registrada: "",
       destino: "",
+      inicio: "",
+      final: "",
     });
   };
   return (
@@ -99,6 +101,7 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
               type="date"
               name="desde"
               id="desde"
+              value={filter.inicio}
               className="ipt-filter"
               onChange={(e) => handleFilter(e, "inicio")}
             />
@@ -109,6 +112,7 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
               type="date"
               name="hasta"
               id="hasta"
+              value={filter.final}
               className="ipt-filter"
               onChange={(e) => handleFilter(e, "final")}
             />
