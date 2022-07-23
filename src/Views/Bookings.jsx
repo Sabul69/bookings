@@ -9,6 +9,7 @@ import "../Styles/Booking/Booking.styles.css";
 import { handleFormatInfo } from "../handlers/Bookings/handlers.js";
 
 const Bookings = () => {
+  const [loader, setLoader] = useState(false);
   const [filter, setFilter] = useState({
     nombre: "",
     agencia: "",
@@ -55,8 +56,10 @@ const Bookings = () => {
   };
 
   const handleFetchData = async () => {
+    setLoader(true);
     const { data } = await axios.get(url);
     handleFormatInfo(data, setData, slice);
+    setLoader(false);
   };
 
   useEffect(() => {
@@ -67,7 +70,7 @@ const Bookings = () => {
   return (
     <div className="contain m-auto">
       <Filter handleUrl={handleUrl} filter={filter} setFilter={setFilter} />
-      <Hub data={data} setSlice={setSlice} />
+      <Hub data={data} setSlice={setSlice} loader={loader} />
     </div>
   );
 };

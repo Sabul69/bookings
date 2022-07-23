@@ -1,8 +1,9 @@
 import { useState } from "react";
 import flecha from "../../icons/flecha.png";
 import Reservations from "./Hub/Reservations";
+import loaderGif from "../../icons/Loader.gif";
 
-const Hub = ({ data, setSlice }) => {
+const Hub = ({ data, setSlice, loader }) => {
   const [details, setDetails] = useState();
 
   const handleClose = () => {
@@ -50,7 +51,23 @@ const Hub = ({ data, setSlice }) => {
           </div>
         </div>
       </div>
-      <Reservations data={data} details={details} setDetails={setDetails} />
+      {loader ? (
+        <div className="flex items-center w-full justify-center">
+          <div className="flex flex-col w-3/5 text-center">
+            <p>Loading ....</p>
+            <div className="w-full flex justify-center">
+              <img src={loaderGif} alt="loader" className="h-32 " />
+            </div>
+          </div>
+        </div>
+      ) : (
+        <Reservations
+          data={data}
+          details={details}
+          setDetails={setDetails}
+          loader={loader}
+        />
+      )}
     </>
   );
 };
