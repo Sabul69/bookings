@@ -1,9 +1,10 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 const Filter = ({ filter, setFilter, handleUrl }) => {
+  const [destinations, setDestinations] = useState(null);
+
   const handleFilter = (e, n) => {
     setFilter({ ...filter, [n]: e.target.value });
-    console.log(filter);
   };
 
   const handleClean = () => {
@@ -17,6 +18,17 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
       final: "",
     });
   };
+  const handleFetchDestinations = async () => {
+    const { data } = await axios.get(
+      "https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/Delegations"
+    );
+    setDestinations(data);
+  };
+
+  useEffect(() => {
+    handleFetchDestinations();
+  }, []);
+
   return (
     <div className="overflow-hidden">
       <h3 className="txt-25 text-color3 m-5 relative md:left-1/4">
@@ -77,7 +89,12 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
             className="ipt-filter"
             onChange={(e) => handleFilter(e, "destino")}
           >
-            <option value="15">Cancun</option>
+            <option value={null}></option>
+            {destinations?.map((destination, index) => (
+              <option value={destination.IdDelegation} key={index}>
+                {destination.Delegation}
+              </option>
+            ))}
           </select>
         </div>
         <div className="p-3 w-full sm:w-6/12 md:w-3/12">
