@@ -61,12 +61,7 @@ const Hub = ({ data, setSlice, loader }) => {
           </div>
         </div>
       ) : (
-        <Reservations
-          data={data}
-          details={details}
-          setDetails={setDetails}
-          loader={loader}
-        />
+        <Reservations data={data} details={details} setDetails={setDetails} />
       )}
     </>
   );

@@ -11,6 +11,7 @@ const Reservation = ({
   bg,
   details,
   setDetails,
+  ip,
 }) => {
   //Use State
   const [open, setOpen] = useState(false);
@@ -113,6 +114,10 @@ const Reservation = ({
               date={service.date}
               hotel={service.hotel}
               name={name}
+              locator={locator}
+              delegation_id={service.delegation_id}
+              line={service.line}
+              ip={ip}
             />
           ))}
           <div

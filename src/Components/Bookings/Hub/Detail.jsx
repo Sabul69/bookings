@@ -11,6 +11,8 @@ import langIcon from "../../../icons/language.png";
 //Phone input
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { formatPost } from "../../../handlers/Bookings/handlers";
+import axios from "axios";
 
 const Detail = ({
   index,
@@ -25,13 +27,22 @@ const Detail = ({
   date,
   hotel,
   name,
+  locator,
+  delegation_id,
+  line,
+  ip,
 }) => {
   const [isEmpty, setIsEmpty] = useState(true);
   const [isEmptyWa, setIsEmptyWa] = useState(true);
   const [atpInfo, setAtpInfo] = useState({
+    locator,
+    name,
     email: "",
     phone: "",
+    language: "ES",
     whatsapp: "",
+    delegation_id,
+    line,
   });
   const [icon, setIcon] = useState("stop");
 
@@ -43,14 +54,18 @@ const Detail = ({
     }
   };
 
-  const handleSend = () => {
+  const handleSend = async () => {
+    const url =
+      "https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHubGroups/register";
     setIcon("loading");
     try {
+      const postInfo = formatPost(atpInfo, ip);
+      console.log(postInfo);
+      await axios.post(url, { postInfo });
       setIcon(true);
     } catch (error) {
       setIcon(false);
     }
-    setIcon("stop");
   };
   const handleFocusPhone = (n) => {
     n === 1 ? setIsEmpty(false) : setIsEmptyWa(false);
@@ -147,8 +162,8 @@ const Detail = ({
           <img src={langIcon} alt="" className="" />
         </div>
         <select name="" id="" className="ipt-filter pl-10 h-full">
-          <option value="">Español</option>
-          <option value="">Ingles</option>
+          <option value="ES">Español</option>
+          <option value="EN">Ingles</option>
         </select>
       </div>
       <button
