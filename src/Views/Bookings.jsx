@@ -27,7 +27,7 @@ const Bookings = () => {
   const handleUrl = () => {
     let nombre;
     let apellido;
-    const a = info.nombre.split(" ");
+    const a = filter.nombre.split(" ");
     if (a.length === 2) {
       [nombre, apellido] = a;
     }
