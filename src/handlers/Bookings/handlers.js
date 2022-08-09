@@ -97,14 +97,14 @@ const formatPost = (info, ip) => {
     channels.push({
       rank: 0,
       channel: "whatsapp",
-      value: info.whatsapp,
+      value: "+" + info.whatsapp,
     });
   }
   if (info.phone !== "") {
     channels.push({
       rank: 0,
       channel: "sms",
-      value: info.phone,
+      value: "+" + info.phone,
     });
   }
 

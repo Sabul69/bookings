@@ -21,13 +21,13 @@ const Bookings = () => {
   const [data, setData] = useState([]);
   const [slice, setSlice] = useState(30);
   const [url, setUrl] = useState(
-    `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=5622`
+    `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=3109`
   );
 
   const handleUrl = () => {
     const [nombre, apellido] = filter.nombre.split(" ");
     setUrl(
-      `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=5622${
+      `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=3109${
         filter.agencia && `&strReferenceAgency=${filter.agencia}`
       }${filter.localizador && `&strRecord=${filter.localizador}`}${
         filter.destino && `&intIdDel=${filter.destino}`

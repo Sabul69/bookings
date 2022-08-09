@@ -12,7 +12,6 @@ import langIcon from "../../../icons/language.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { formatPost } from "../../../handlers/Bookings/handlers";
-import axios from "axios";
 
 const Detail = ({
   index,
@@ -60,11 +59,21 @@ const Detail = ({
     setIcon("loading");
     try {
       const postInfo = formatPost(atpInfo, ip);
-      console.log(postInfo);
-      await axios.post(url, { postInfo });
-      setIcon(true);
+      const config = {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(postInfo),
+      };
+      const response = await fetch(url, config);
+      const json = await response.json();
+      if (!json.is_valid) setIcon(false);
+      else setIcon(true);
     } catch (error) {
       setIcon(false);
+      console.log("fail request");
     }
   };
   const handleFocusPhone = (n) => {
