@@ -63,6 +63,8 @@ const handleFormatInfo = (info, setData, slice) => {
       acc[cur.Record] = {
         locator: cur.Record,
         name,
+        nam: cur.Name,
+        lastName: cur.LastName,
         services: [service],
         service: [cur.ServiceType],
         language: cur.Language,
@@ -85,20 +87,6 @@ const handleFormatInfo = (info, setData, slice) => {
 
 const formatPost = (info, ip) => {
   const channels = [];
-  let name;
-  let lastname;
-  const a = info.name.split(" ");
-  if (a.length === 2) {
-    [name, lastname] = a;
-  }
-  if (a.length === 3) {
-    name = a[0];
-    lastname = `${a[1]} ${a[2]}`;
-  }
-  if (a.length === 4) {
-    name = `${a[0]} ${a[1]}`;
-    lastname = `${a[2]} ${a[3]}`;
-  }
   if (info.email !== "") {
     channels.push({
       rank: 0,
@@ -123,8 +111,8 @@ const formatPost = (info, ip) => {
 
   const template = {
     locator: info.locator,
-    name: name,
-    lastname: lastname,
+    name: info.name,
+    lastname: info.lastname,
     language: info.language,
     delegation_id: info.delegation_id,
     lines: [info.line && +info.line],

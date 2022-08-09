@@ -6,6 +6,7 @@ import flecha2 from "../../../icons/flecha-hacia-arriba.svg";
 const Reservation = ({
   locator,
   name,
+  lastName,
   service,
   services,
   bg,
@@ -114,6 +115,7 @@ const Reservation = ({
               date={service.date}
               hotel={service.hotel}
               name={name}
+              lastName={lastName}
               locator={locator}
               delegation_id={service.delegation_id}
               line={service.line}

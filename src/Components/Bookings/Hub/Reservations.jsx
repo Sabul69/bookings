@@ -27,7 +27,8 @@ const Reservations = ({ data, details, setDetails }) => {
         <Reservation
           key={index}
           locator={info.locator}
-          name={info.name}
+          name={info.nam}
+          lastName={info.lastName}
           service={info.service}
           services={info.services}
           bg={index}

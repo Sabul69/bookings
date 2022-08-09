@@ -26,6 +26,7 @@ const Detail = ({
   date,
   hotel,
   name,
+  lastName,
   locator,
   delegation_id,
   line,
@@ -36,6 +37,7 @@ const Detail = ({
   const [atpInfo, setAtpInfo] = useState({
     locator,
     name,
+    lastName,
     email: "",
     phone: "",
     language: "ES",
@@ -59,6 +61,7 @@ const Detail = ({
     setIcon("loading");
     try {
       const postInfo = formatPost(atpInfo, ip);
+      console.log(postInfo);
       const config = {
         method: "POST",
         headers: {
