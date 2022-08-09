@@ -85,7 +85,20 @@ const handleFormatInfo = (info, setData, slice) => {
 
 const formatPost = (info, ip) => {
   const channels = [];
-  const [name, lastname] = info.name.split(" ");
+  let name;
+  let lastname;
+  const a = info.name.split(" ");
+  if (a.length === 2) {
+    [name, lastname] = a;
+  }
+  if (a.length === 3) {
+    name = a[0];
+    lastname = `${a[1]} ${a[2]}`;
+  }
+  if (a.length === 4) {
+    name = `${a[0]} ${a[1]}`;
+    lastname = `${a[2]} ${a[3]}`;
+  }
   if (info.email !== "") {
     channels.push({
       rank: 0,

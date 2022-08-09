@@ -25,7 +25,20 @@ const Bookings = () => {
   );
 
   const handleUrl = () => {
-    const [nombre, apellido] = filter.nombre.split(" ");
+    let nombre;
+    let apellido;
+    const a = info.nombre.split(" ");
+    if (a.length === 2) {
+      [nombre, apellido] = a;
+    }
+    if (a.length === 3) {
+      nombre = a[0];
+      apellido = `${a[1]} ${a[2]}`;
+    }
+    if (a.length === 4) {
+      nombre = `${a[0]} ${a[1]}`;
+      apellido = `${a[2]} ${a[3]}`;
+    }
     setUrl(
       `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=3109${
         filter.agencia && `&strReferenceAgency=${filter.agencia}`
