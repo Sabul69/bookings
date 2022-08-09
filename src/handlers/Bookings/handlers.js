@@ -112,7 +112,7 @@ const formatPost = (info, ip) => {
   const template = {
     locator: info.locator,
     name: info.name,
-    lastname: info.lastname,
+    lastname: info.lastname ? info.lastname : "",
     language: info.language,
     delegation_id: info.delegation_id,
     lines: [info.line && +info.line],
