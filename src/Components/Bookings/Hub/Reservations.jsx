@@ -2,12 +2,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Reservation from "./Reservation";
 
-const Reservations = ({ data, details, setDetails }) => {
+const Reservations = ({ data, details, setDetails, setSlice, slice }) => {
   const [ip, setIp] = useState(null);
 
   const fetchIp = async () => {
     const res = await axios.get("https://geolocation-db.com/json/");
     setIp(res.data.IPv4);
+  };
+
+  const handleNext = () => {
+    const newSlice = slice * 2;
+    setSlice(newSlice);
   };
 
   useEffect(() => {
@@ -27,7 +32,8 @@ const Reservations = ({ data, details, setDetails }) => {
         <Reservation
           key={index}
           locator={info.locator}
-          name={info.nam}
+          name={info.name}
+          nam={info.nam}
           lastName={info.lastName}
           service={info.service}
           services={info.services}
@@ -37,6 +43,16 @@ const Reservations = ({ data, details, setDetails }) => {
           ip={ip}
         />
       ))}
+      <div className="w-full bg-color1">
+        <button
+          className="btn-filter my-3 ml-12"
+          onClick={() => {
+            handleNext();
+          }}
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

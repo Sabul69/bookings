@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 const Filter = ({ filter, setFilter, handleUrl }) => {
+  const [minDate, setMinDate] = useState(null);
   const [destinations, setDestinations] = useState(null);
 
   const handleFilter = (e, n) => {
@@ -26,6 +27,9 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
   };
 
   useEffect(() => {
+    const date = new Date();
+    date.setDate(date.getDate() - 32);
+    setMinDate(date.toISOString().split("T")[0]);
     handleFetchDestinations();
   }, []);
 
@@ -118,6 +122,7 @@ const Filter = ({ filter, setFilter, handleUrl }) => {
               type="date"
               name="desde"
               id="desde"
+              min={minDate}
               value={filter.inicio}
               className="ipt-filter"
               onChange={(e) => handleFilter(e, "inicio")}

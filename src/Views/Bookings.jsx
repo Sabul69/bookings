@@ -7,8 +7,12 @@ import Hub from "../Components/Bookings/Hub";
 import "../Styles/Booking/Booking.styles.css";
 //handler
 import { handleFormatInfo } from "../handlers/Bookings/handlers.js";
+import { clientId, mainUrl } from "../Utils/UrlVariables";
 
 const Bookings = () => {
+  const [data, setData] = useState([]);
+  const [slice, setSlice] = useState(30);
+  const [formatedArray, setFormatedArray] = useState([]);
   const [loader, setLoader] = useState(false);
   const [filter, setFilter] = useState({
     nombre: "",
@@ -18,10 +22,8 @@ const Bookings = () => {
     destino: "15",
     fecha: "Reservacion",
   });
-  const [data, setData] = useState([]);
-  const [slice, setSlice] = useState(30);
   const [url, setUrl] = useState(
-    `https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHub/BookingsByAgency?intIdCli=3109`
+    `${mainUrl}/ExperiencesHub/BookingsByAgency?intIdCli=${clientId}`
   );
 
   const handleUrl = () => {
@@ -65,25 +67,35 @@ const Bookings = () => {
           : ""
       }`
     );
-    console.log(url);
   };
 
   const handleFetchData = async () => {
     setLoader(true);
     const { data } = await axios.get(url);
-    handleFormatInfo(data, setData, slice);
+    const array = handleFormatInfo(data);
+    setFormatedArray(array);
     setLoader(false);
+  };
+
+  const handleSlice = (array, slice) => {
+    const fragment = array.slice(0, slice);
+    setData(fragment);
   };
 
   useEffect(() => {
     handleFetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url, slice]);
+  }, [url]);
+
+  useEffect(() => {
+    handleSlice(formatedArray, slice);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, slice, formatedArray]);
 
   return (
     <div className="contain m-auto">
       <Filter handleUrl={handleUrl} filter={filter} setFilter={setFilter} />
-      <Hub data={data} setSlice={setSlice} loader={loader} />
+      <Hub data={data} slice={slice} setSlice={setSlice} loader={loader} />
     </div>
   );
 };

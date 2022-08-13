@@ -1,3 +1,5 @@
+import { rest } from "lodash";
+
 function toMonthName(monthNumber) {
   const date = new Date();
   date.setMonth(monthNumber - 1);
@@ -6,7 +8,7 @@ function toMonthName(monthNumber) {
     month: "short",
   });
 }
-const handleFormatInfo = (info, setData, slice) => {
+const handleFormatInfo = (info) => {
   //format data
   const formatedData = info.reduce((acc, cur, idx) => {
     let service;
@@ -81,11 +83,17 @@ const handleFormatInfo = (info, setData, slice) => {
     };
     accumulator += 1;
   }
-  const fragment = formatedArray.slice(0, slice);
-  setData(fragment);
+  return formatedArray;
 };
 
 const formatPost = (info, ip) => {
+  if (info.newName !== `${info.name} ${info.lastName}`) {
+    const a = info.newName.split(" ");
+    info.name = a[0];
+    a.shift();
+    info.lastName = a.join(" ");
+  }
+
   const channels = [];
   if (info.email !== "") {
     channels.push({
@@ -112,7 +120,7 @@ const formatPost = (info, ip) => {
   const template = {
     locator: info.locator,
     name: info.name,
-    lastname: info.lastname ? info.lastname : "",
+    lastname: info.lastName ? info.lastName : "",
     language: info.language,
     delegation_id: info.delegation_id,
     lines: [info.line && +info.line],

@@ -3,7 +3,7 @@ import flecha from "../../icons/flecha.png";
 import Reservations from "./Hub/Reservations";
 import loaderGif from "../../icons/Loader.gif";
 
-const Hub = ({ data, setSlice, loader }) => {
+const Hub = ({ data, setSlice, loader, slice }) => {
   const [details, setDetails] = useState();
 
   const handleClose = () => {
@@ -61,7 +61,13 @@ const Hub = ({ data, setSlice, loader }) => {
           </div>
         </div>
       ) : (
-        <Reservations data={data} details={details} setDetails={setDetails} />
+        <Reservations
+          setSlice={setSlice}
+          slice={slice}
+          data={data}
+          details={details}
+          setDetails={setDetails}
+        />
       )}
     </>
   );

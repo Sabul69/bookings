@@ -12,6 +12,9 @@ import langIcon from "../../../icons/language.png";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { formatPost } from "../../../handlers/Bookings/handlers";
+import { mainUrl } from "../../../Utils/UrlVariables";
+import libphonenumber from "google-libphonenumber";
+import ReactTooltip from "react-tooltip";
 
 const Detail = ({
   index,
@@ -26,17 +29,27 @@ const Detail = ({
   date,
   hotel,
   name,
+  nam,
   lastName,
   locator,
   delegation_id,
   line,
   ip,
 }) => {
+  const phoneUtil = libphonenumber.PhoneNumberUtil.getInstance();
+  //useState
+  const [tooltip, setTooltip] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [validEmail, setValidEmail] = useState(true);
+  const [validPhone, setValidPhone] = useState(true);
+  const [validWhats, setValidWhats] = useState(true);
+  const [icon, setIcon] = useState("stop");
   const [isEmpty, setIsEmpty] = useState(true);
   const [isEmptyWa, setIsEmptyWa] = useState(true);
   const [atpInfo, setAtpInfo] = useState({
+    newName: `${nam} ${lastName}`,
     locator,
-    name,
+    name: nam,
     lastName,
     email: "",
     phone: "",
@@ -45,8 +58,8 @@ const Detail = ({
     delegation_id,
     line,
   });
-  const [icon, setIcon] = useState("stop");
 
+  //functions
   const handleAtpInfo = (e, name) => {
     if (name === "phone" || name === "whatsapp") {
       setAtpInfo({ ...atpInfo, [name]: e });
@@ -56,8 +69,7 @@ const Detail = ({
   };
 
   const handleSend = async () => {
-    const url =
-      "https://nexusgov3.nexustours.net/ExperiencesHubServices.STG/api/ExperiencesHubGroups/register";
+    const url = `${mainUrl}/ExperiencesHubGroups/register`;
     setIcon("loading");
     try {
       const postInfo = formatPost(atpInfo, ip);
@@ -72,16 +84,39 @@ const Detail = ({
       };
       const response = await fetch(url, config);
       const json = await response.json();
-      if (!json.is_valid) setIcon(false);
-      else setIcon(true);
+      if (!json.is_valid) {
+        setIcon(false);
+        console.log(json.errors[0].text);
+        setErrorMessage(json.errors[0].text);
+      } else {
+        setIcon(true);
+        setErrorMessage("");
+      }
     } catch (error) {
       setIcon(false);
-      console.log("fail request");
+      setErrorMessage("Fail: couldn't send request");
     }
   };
   const handleFocusPhone = (n) => {
     n === 1 ? setIsEmpty(false) : setIsEmptyWa(false);
   };
+
+  const validateEmail = () => {
+    setValidEmail(false);
+    if (/\S+@\S+\.\S+/.test(atpInfo.email)) {
+      setValidEmail(true);
+    }
+    if (atpInfo.email === "") {
+      setValidEmail(true);
+    }
+  };
+
+  //UseEffect
+
+  useEffect(() => {
+    validateEmail();
+  }, [atpInfo]);
+
   useEffect(() => {
     if (index === 0) {
       setFill(atpInfo);
@@ -98,10 +133,18 @@ const Detail = ({
 
   return (
     <div className="bg-white w-96 m-auto p-3 rounded-md border-2 border-color5 border-opacity-40 flex justify-between flex-wrap text-color3 mb-4 txt-14">
-      <p className="w-full sm:w-3/12 my-1">
-        <span className="font-semibold">Nombre del pasajero </span>
-        {name}
-      </p>
+      <div className="w-full sm:w-3/12 my-1">
+        <p className="font-semibold">Nombre del pasajero </p>
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="name"
+          value={atpInfo.newName}
+          className="text-color3 w-full"
+          onChange={(e) => handleAtpInfo(e, "newName")}
+        />
+      </div>
       <p className="w-full sm:w-2/12 my-1 font-bold">
         Servicio | <span className="text-color2">{service}</span> {" | "} {date}
       </p>
@@ -146,8 +189,32 @@ const Detail = ({
           placeholder="Telefono"
           value={atpInfo.phone}
           buttonClass={isEmpty && "!hidden z-20"}
-          onFocus={(e) => handleFocusPhone(1)}
+          onFocus={() => handleFocusPhone(1)}
           onChange={(e) => handleAtpInfo(e, "phone")}
+          isValid={(inputNumber, country) => {
+            setValidPhone(false);
+            if (
+              inputNumber &&
+              country &&
+              inputNumber !== "" &&
+              country !== 0 &&
+              inputNumber.length > 2
+            ) {
+              const number = phoneUtil.parseAndKeepRawInput(
+                inputNumber,
+                country.iso2
+              );
+              if (phoneUtil.isValidNumber(number)) {
+                setValidPhone(true);
+              }
+              if (!phoneUtil.isValidNumber(number)) {
+                setValidPhone(false);
+              }
+            }
+            if (inputNumber.length === 0) {
+              setValidPhone(true);
+            }
+          }}
         />
       </div>
       <div className="wper15 my-1 relative">
@@ -164,8 +231,32 @@ const Detail = ({
           value={atpInfo.whatsapp}
           buttonClass={isEmptyWa && "!hidden"}
           dropdownClass="!h-20"
-          onFocus={(e) => handleFocusPhone(2)}
+          onFocus={() => handleFocusPhone(2)}
           onChange={(e) => handleAtpInfo(e, "whatsapp")}
+          isValid={(inputNumber, country) => {
+            setValidWhats(false);
+            if (
+              inputNumber &&
+              country &&
+              inputNumber !== "" &&
+              country !== 0 &&
+              inputNumber.length > 2
+            ) {
+              const number = phoneUtil.parseAndKeepRawInput(
+                inputNumber,
+                country.iso2
+              );
+              if (phoneUtil.isValidNumber(number)) {
+                setValidWhats(true);
+              }
+              if (!phoneUtil.isValidNumber(number)) {
+                setValidWhats(false);
+              }
+            }
+            if (inputNumber.length === 0) {
+              setValidWhats(true);
+            }
+          }}
         />
       </div>
 
@@ -183,6 +274,14 @@ const Detail = ({
           icon === "loading" && "opacity-70"
         }`}
         onClick={handleSend}
+        disabled={
+          (atpInfo.phone === "" &&
+            atpInfo.email === "" &&
+            atpInfo.whatsapp === "") ||
+          !validEmail ||
+          !validPhone ||
+          !validWhats
+        }
       >
         Enviar ATP
       </button>
@@ -195,11 +294,24 @@ const Detail = ({
             <div></div>
           </div>
         ) : (
-          <img
-            src={icon === true ? success : icon === false ? error : ""}
-            alt=""
-            className=""
-          />
+          <div>
+            <img
+              data-tip
+              data-for="errorTooltip"
+              src={icon === true ? success : icon === false ? error : ""}
+              alt=""
+              className=""
+              onMouseEnter={() => setTooltip(true)}
+              onMouseLeave={() => {
+                setTooltip(false);
+              }}
+            />
+            {!icon && tooltip && (
+              <ReactTooltip id="errorTooltip" type="error">
+                {`${errorMessage} `}
+              </ReactTooltip>
+            )}
+          </div>
         )}
       </div>
     </div>
